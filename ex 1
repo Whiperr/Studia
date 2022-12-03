@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int szerokosc, dlugosc, pole;
+            Console.WriteLine("Podaj szerokosc od 3 do 40");
+            while (!int.TryParse(Console.ReadLine(), out szerokosc) || szerokosc > 40 || szerokosc < 3)
+            {
+                Console.WriteLine("Bledna wartosc podaj od 3 do 40");
+            }
+            Console.WriteLine("Podaj dlugosc do 2 do 25");
+            while (!int.TryParse(Console.ReadLine(), out dlugosc) || dlugosc > 25 || dlugosc < 2)
+            {
+                Console.WriteLine("Bledna wartosc podaj od 2 do 25");
+            }
+            Console.Write("*");
+            for (int i = 0; i <szerokosc; i++)
+            {
+                Console.Write("-");
+            }
+            Console.Write("*");
+            Console.WriteLine();
+            for (int i = 0; i < dlugosc; i++)
+            {
+                Console.Write("|");
+                for (int j = 0; j < szerokosc; j++)
+                {
+                    Console.Write(".");
+                }
+                Console.Write("|");
+                Console.WriteLine();
+            }
+            Console.Write("*");
+            for (int i = 0; i < szerokosc; i++)
+            {
+                Console.Write("-");
+            }
+            Console.Write("*");
+            pole = szerokosc * dlugosc;
+            Console.WriteLine();
+            Console.WriteLine("Szerokosc wynosi {0} Dlugosc wynosi {1} \n Pole wynosi {3}",szerokosc,dlugosc,pole);
+        }
+    }
+}
