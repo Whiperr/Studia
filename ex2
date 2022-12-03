@@ -1,0 +1,56 @@
+int rozmiar;
+            Console.WriteLine("Podaj lczbe pomieszczen od 1 do 10");
+            while (!int.TryParse(Console.ReadLine(),out rozmiar) || rozmiar>10 || rozmiar<1)
+            {
+                Console.WriteLine("Blad podaj ilosc od 1 do 10");
+            }
+            int[] pomieszczenia = new int[rozmiar];
+            int[] szerokosc = new int[pomieszczenia.Length];
+            int[] dlugosc = new int[pomieszczenia.Length];
+            for (int i = 0; i < pomieszczenia.Length; i++)
+            {
+                Console.WriteLine("Podaj szerokosc pomieszczenia numer: "+(i+1)+" zakres 3-40");
+                while (!int.TryParse(Console.ReadLine(), out szerokosc[i]) || szerokosc[i] > 40 || szerokosc[i] < 3)
+                {
+                    Console.WriteLine("Blad podaj ilosc od 3 do 40");
+                }
+                Console.WriteLine("Podaj dlugosc pomieszczenia numer: " + (i + 1) + " zakres 2-25");
+                while (!int.TryParse(Console.ReadLine(), out dlugosc[i]) ||dlugosc[i] > 25 || dlugosc[i] < 2)
+                {
+                    Console.WriteLine("Blad podaj ilosc od 2 do 25");
+                }
+
+            }
+            for (int i = 0; i < pomieszczenia.Length; i++)
+            {
+                Console.WriteLine("Plan pomieszczenia nr "+(i+1));
+                Console.Write("*");
+                for (int j = 0; j < szerokosc[i]; j++)
+                {
+                    Console.Write("-");
+                }
+                Console.Write("*");
+                for (int l = 0; l < dlugosc[i]; l++)
+                {
+                    Console.WriteLine("");
+                    Console.Write("|");
+                        for (int k = 0; k < szerokosc[i]; k++)
+                    {
+                        Console.Write(".");
+                    }
+                    Console.Write("|");
+                }
+                Console.WriteLine("");
+                Console.Write("*");
+                for (int j = 0; j < szerokosc[i]; j++)
+                {
+                    Console.Write("-");
+                }
+                Console.Write("*");
+                Console.WriteLine("");
+                Console.WriteLine("Szerokosc = " + szerokosc[i]+" Dlugosc= " + dlugosc[i]+" Powierzchnia = " + (dlugosc[i] * szerokosc[i])+" mb2");
+                Console.WriteLine("");
+                Console.WriteLine("");
+               
+            }
+            Console.ReadLine();
