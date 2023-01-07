@@ -1,0 +1,115 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+
+
+    namespace Katalogi
+    {
+        public class Book
+        {
+            public string Autor;
+            public string Tytul;
+            public int LiczbaStron;
+            public int Rok;
+        }
+
+        public class Program
+        {
+            public static void Main(string[] args)
+            {
+                List<Book> books = new List<Book>();
+            bool Czy = true;    
+            do 
+                {
+                    Console.Write("Witamy :) Co byś chciał wykonać? \n (1) Utwórz nowy katalog biblioteczny \n " +
+                        "(2) Zapisz katalog do pliku \n (3) Odczytaj katalog z pliku \n (4) Wyszukaj książki w katalogu \n (5) Koniec \n" +
+                        "Wybierz zadanie z menu: ");
+                    int opcja;
+                    while (!int.TryParse(Console.ReadLine(), out opcja) || opcja > 5 || opcja < 1)
+                    {
+                        Console.WriteLine("Wybierz opcję 1-5");
+                    }
+                    switch (opcja)
+                    {
+                        case 1:
+                            Console.Write("Podaj liczbę książek, którą chcesz dodać do pliku: ");
+                            int ile;
+                            while (!int.TryParse(Console.ReadLine(), out ile))
+                                Console.WriteLine("Nie podano liczby");
+
+                            for (int i = 0; i < ile; i++)
+                            {
+                                Console.Write("Podaj tytuł: ");
+                                string tytul = Console.ReadLine();
+                                Console.Write("Podaj autora: ");
+                                string autor = Console.ReadLine();
+                                Console.Write("Podaj liczbe stron: ");
+                            int liczbastron;
+                            while (!int.TryParse(Console.ReadLine(), out liczbastron) || liczbastron > 1000 || liczbastron < 1)
+                            {
+                                Console.WriteLine("Mozliwy zakres od 1 do 1000");
+                            }
+                                Console.Write("Podaj rok wydania: ");
+                            int rok;
+                            while (!int.TryParse(Console.ReadLine(), out rok) || rok > 2200 || rok < 1)
+                            {
+                                Console.WriteLine("Zakres od 1 do 2200");
+                            }
+                                Book book = new Book()
+                                {
+                                    Tytul = tytul,
+                                    Autor = autor,
+                                    LiczbaStron = liczbastron,
+                                    Rok = rok
+                                };
+                                books.Add(book);
+                            }
+                            break;
+                        case 2:
+                            Console.Write("Podaj nazwę pliku katalogu: ");
+                            string nazwa = Console.ReadLine();
+                            DirectoryInfo di = new DirectoryInfo(nazwa);
+                            if (di.Exists == false)
+                            {
+                                using (StreamWriter plik = new StreamWriter(nazwa + ".txt"))
+                                {
+                                    foreach (var book in books)
+                                    {
+                                        plik.WriteLine($"{book.Tytul}, {book.Autor}, {book.LiczbaStron}, {book.Rok}");
+                                    }
+                                }
+                                break;
+                            }
+                            Console.WriteLine("Brak katalogu do zapisania");
+                            Console.ReadLine();
+                            break;
+                        case 3:
+                            Console.Write("Podaj nazwę pliku katalogu: ");
+                            string nazwa2 = Console.ReadLine();
+                            if (File.Exists(nazwa2 + ".txt"))
+                            {
+                                using (StreamReader plik = new StreamReader(nazwa2 + ".txt"))
+                                {
+                                    Console.WriteLine("Tytuł, Autorzy, Liczba stron, Rok wydania");
+                                    Console.WriteLine(plik.ReadToEnd());
+                                    Console.ReadLine();
+                                }
+                            }
+                            break;
+                        case 4:
+                           
+                        case 5:
+                        Czy = false;
+                            break;
+                    }
+                    Console.Clear();
+                }
+                while (Czy);
+            }
+        }
+    }
